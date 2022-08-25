@@ -24,7 +24,7 @@ resource "google_sql_database_instance" "default" {
   ]
 
   settings {
-    tier              = "db-custom-1-3840"
+    tier              = var.instance_specs
     availability_type = "ZONAL"
     disk_autoresize   = true
     disk_size         = 10

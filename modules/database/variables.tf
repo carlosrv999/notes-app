@@ -30,3 +30,7 @@ variable "database_version" {
 variable "home_ip_address" {
   type = string
 }
+
+variable "instance_specs" {
+  type = string
+}
