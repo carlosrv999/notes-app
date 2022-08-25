@@ -7,5 +7,9 @@ output "network_name" {
 }
 
 output "public_subnets_names" {
-  value = google_compute_subnetwork.default[*].name
+  value = google_compute_subnetwork.public[*].name
+}
+
+output "private_subnets_names" {
+  value = google_compute_subnetwork.private[*].name
 }
