@@ -1,2 +1,15 @@
 gcloud services enable compute.googleapis.com
 gcloud services enable servicenetworking.googleapis.com
+gcloud services enable sqladmin.googleapis.com
+
+# Restore Backup
+
+gcloud sql users set-password postgres \
+--instance=notesapp-database-3 \
+--prompt-for-password
+
+Poner la clave
+
+Luego Restaurar la BD
+
+psql -h 10.100.32.9 -U postgres

@@ -24,7 +24,7 @@ module "database" {
   region                   = var.region
   database_version         = "POSTGRES_14"
   home_ip_address          = "38.25.18.114"
-  instance_name            = "notesapp-database-2"
+  instance_name            = "notesapp-database-4"
   instance_specs           = var.db_instance_specs
 
 }
@@ -39,4 +39,38 @@ module "compute" {
   subnetwork_id   = module.network.public_subnets_names[0]
   instance_name   = "vm-web-notesapp"
 
+}
+
+resource "google_compute_firewall" "default" {
+  name    = "nodejs"
+  network = module.network.network_id
+
+  direction = "INGRESS"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["3000"]
+  }
+
+  source_ranges = [
+    "0.0.0.0/0",
+  ]
+
+  target_service_accounts = [
+    module.compute.service_account_email
+  ]
+
+}
+
+resource "google_sql_user" "default" {
+  name     = "administrator"
+  instance = module.database.instance_name
+  password = "DcbTrFuHbVq2We6G3#dB"
+}
+
+resource "google_sql_database" "default" {
+  charset   = "UTF8"
+  collation = "en_US.UTF8"
+  instance  = module.database.instance_name
+  name      = "notesapp"
 }

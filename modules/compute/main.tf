@@ -29,6 +29,12 @@ resource "google_compute_instance" "default" {
   machine_type = var.machine_type
   zone         = var.zone
 
+  lifecycle {
+    ignore_changes = [
+      metadata["ssh-keys"]
+    ]
+  }
+
   boot_disk { #tfsec:ignore:google-compute-vm-disk-encryption-customer-key
     auto_delete = true
     initialize_params {
@@ -39,6 +45,9 @@ resource "google_compute_instance" "default" {
   network_interface {
     network    = var.network_id
     subnetwork = var.subnetwork_id
+    access_config {
+      // Ephemeral public IP
+    }
   }
 
   service_account {
