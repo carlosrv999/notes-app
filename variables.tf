@@ -7,3 +7,8 @@ variable "project_id" {
   type = string
   description = "Project ID"
 }
+
+variable "db_instance_specs" {
+  type = string
+  description = "SQL database instance type and size"
+}
