@@ -5,7 +5,7 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
 git clone https://github.com/carlosrv999/nextjs-prisma-CRUD.git
 cd ~/nextjs-prisma-CRUD/
-npm install ~/nextjs-prisma-CRUD/
+npm install
 npm run build
 cp -r ~/nextjs-prisma-CRUD/.next/static ~/nextjs-prisma-CRUD/.next/standalone/.next/
 
@@ -17,5 +17,3 @@ sudo nano /lib/systemd/system/notesapp.service
 sudo systemctl daemon-reload
 sudo systemctl start notesapp.service
 sudo systemctl status notesapp.service
-
-DATABASE_URL='postgresql://notes_user:My_Encrypted_P4ssW0rd!@10.100.32.19:5432/notesapp?schema=public'
