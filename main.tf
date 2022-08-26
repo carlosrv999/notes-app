@@ -24,7 +24,7 @@ module "database" {
   region                   = var.region
   database_version         = "POSTGRES_14"
   home_ip_address          = "38.25.18.114"
-  instance_name            = "notesapp-database-7"
+  instance_name            = "notesapp-database-8"
   instance_specs           = var.db_instance_specs
 
 }
@@ -64,20 +64,17 @@ resource "google_compute_firewall" "default" {
 }
 
 resource "google_compute_firewall" "ssh" {
-  name    = "ssh"
-  network = module.network.network_id
-
+  name      = "ssh"
+  network   = module.network.network_id
   direction = "INGRESS"
 
   allow {
     protocol = "tcp"
     ports    = ["22"]
   }
-
   source_ranges = [
     "38.25.18.114/32"
   ]
-
   target_service_accounts = [
     google_service_account.default.email
   ]
