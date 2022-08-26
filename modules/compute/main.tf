@@ -1,24 +1,3 @@
-resource "google_compute_firewall" "default" {
-  name    = "ssh"
-  network = var.network_id
-
-  direction = "INGRESS"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  source_ranges = [
-    var.home_ip_address
-  ]
-
-  target_service_accounts = [
-    var.service_account_email
-  ]
-
-}
-
 resource "google_compute_instance" "default" {
   name         = var.instance_name
   machine_type = var.machine_type
