@@ -24,7 +24,7 @@ module "database" {
   region                   = var.region
   database_version         = "POSTGRES_14"
   home_ip_address          = "38.25.18.114"
-  instance_name            = "notesapp-database-6"
+  instance_name            = "notesapp-database-7"
   instance_specs           = var.db_instance_specs
 
 }
