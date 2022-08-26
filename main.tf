@@ -79,7 +79,7 @@ resource "google_compute_firewall" "default" {
 
 }
 
-resource "google_compute_firewall" "default" {
+resource "google_compute_firewall" "ssh" {
   name    = "ssh"
   network = module.network.network_id
 
