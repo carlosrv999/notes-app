@@ -1,8 +1,3 @@
-resource "google_service_account" "default" {
-  account_id   = "notesapp-account"
-  display_name = "NotesApp Service Account"
-}
-
 resource "google_compute_firewall" "default" {
   name    = "ssh"
   network = var.network_id
@@ -19,7 +14,7 @@ resource "google_compute_firewall" "default" {
   ]
 
   target_service_accounts = [
-    google_service_account.default.email
+    var.service_account_email
   ]
 
 }
@@ -52,7 +47,7 @@ resource "google_compute_instance" "default" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.default.email
+    email  = var.service_account_email
     scopes = ["cloud-platform"]
   }
 
