@@ -34,7 +34,6 @@ module "compute" {
 
   machine_type          = var.machine_type
   zone                  = "us-central1-c"
-  home_ip_address       = "38.25.18.114/32"
   network_id            = module.network.network_id
   subnetwork_id         = module.network.public_subnets_names[0]
   instance_name         = "vm-web-notesapp"
@@ -47,7 +46,6 @@ module "compute-temporal" {
 
   machine_type          = var.machine_type
   zone                  = "us-central1-c"
-  home_ip_address       = "38.25.18.114/32"
   network_id            = module.network.network_id
   subnetwork_id         = module.network.public_subnets_names[0]
   instance_name         = "vm-web-notesapp-2"
@@ -73,6 +71,27 @@ resource "google_compute_firewall" "default" {
 
   source_ranges = [
     "0.0.0.0/0",
+  ]
+
+  target_service_accounts = [
+    google_service_account.default.email
+  ]
+
+}
+
+resource "google_compute_firewall" "default" {
+  name    = "ssh"
+  network = module.network.network_id
+
+  direction = "INGRESS"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  source_ranges = [
+    "38.25.18.114/32"
   ]
 
   target_service_accounts = [
