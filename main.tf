@@ -41,6 +41,18 @@ module "compute" {
 
 }
 
+module "compute-temporal" {
+  source = "./modules/compute"
+
+  machine_type    = var.machine_type
+  zone            = "us-central1-c"
+  home_ip_address = "38.25.18.114/32"
+  network_id      = module.network.network_id
+  subnetwork_id   = module.network.public_subnets_names[0]
+  instance_name   = "vm-web-notesapp-2"
+
+}
+
 resource "google_compute_firewall" "default" {
   name    = "nodejs"
   network = module.network.network_id
