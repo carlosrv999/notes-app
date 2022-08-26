@@ -1,0 +1,14 @@
+[Unit]
+Description=Notes Application
+Documentation=Simple notes application for end user
+After=network.target
+
+[Service]
+Environment=DATABASE_URL='postgresql://notes_user:My_Encrypted_P4ssW0rd!@10.100.32.19:5432/notesapp?schema=public'
+Type=simple
+User=node
+ExecStart=/usr/bin/node /home/node/standalone/server.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
