@@ -24,7 +24,7 @@ module "database" {
   region                   = var.region
   database_version         = "POSTGRES_14"
   home_ip_address          = "38.25.18.114"
-  instance_name            = "notesapp-database-7"
+  instance_name            = "notesapp-database-8"
   instance_specs           = var.db_instance_specs
 
 }
@@ -41,59 +41,40 @@ module "compute" {
 
 }
 
-module "compute-temporal" {
-  source = "./modules/compute"
-
-  machine_type          = var.machine_type
-  zone                  = "us-central1-c"
-  network_id            = module.network.network_id
-  subnetwork_id         = module.network.public_subnets_names[0]
-  instance_name         = "vm-web-notesapp-2"
-  service_account_email = google_service_account.default.email
-
-}
-
 resource "google_service_account" "default" {
   account_id   = "notesapp-account"
   display_name = "NotesApp Service Account"
 }
 
 resource "google_compute_firewall" "default" {
-  name    = "nodejs"
-  network = module.network.network_id
-
+  name      = "nodejs"
+  network   = module.network.network_id
   direction = "INGRESS"
 
   allow {
     protocol = "tcp"
     ports    = ["3000"]
   }
-
   source_ranges = [
     "0.0.0.0/0",
   ]
-
   target_service_accounts = [
     google_service_account.default.email
   ]
-
 }
 
 resource "google_compute_firewall" "ssh" {
-  name    = "ssh"
-  network = module.network.network_id
-
+  name      = "ssh"
+  network   = module.network.network_id
   direction = "INGRESS"
 
   allow {
     protocol = "tcp"
     ports    = ["22"]
   }
-
   source_ranges = [
     "38.25.18.114/32"
   ]
-
   target_service_accounts = [
     google_service_account.default.email
   ]
