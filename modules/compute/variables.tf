@@ -21,3 +21,7 @@ variable "instance_name" {
 variable "home_ip_address" {
   type = string
 }
+
+variable "service_account_email" {
+  type = string
+}
