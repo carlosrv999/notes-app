@@ -28,7 +28,7 @@ module "database" {
   instance_specs           = var.db_instance_specs
 
 }
-/*
+
 module "compute" {
   source = "./modules/compute"
 
@@ -39,7 +39,7 @@ module "compute" {
   instance_name         = "vm-web-notesapp"
   service_account_email = google_service_account.default.email
 
-}*/
+}
 
 resource "google_service_account" "default" {
   account_id   = "notesapp-account"
