@@ -15,3 +15,5 @@ Poner la clave
 Luego Restaurar la BD
 
 psql -h 10.100.32.9 -U postgres
+
+StrongAdminPassw0rd
