@@ -4,7 +4,7 @@ Documentation=https://example.com
 After=network.target
 
 [Service]
-Environment=DATABASE_URL='postgresql://notes_user:My_Encrypted_P4ssW0rd!@10.100.32.19:5432/notesapp?schema=public'
+Environment=DATABASE_URL='postgresql://notes_user:My_Encrypted_P4ssW0rd!@10.100.32.3:5432/notesapp?schema=public'
 Environment=PORT=8080
 Type=simple
 User=node
