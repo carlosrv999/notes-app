@@ -18,6 +18,10 @@ sudo systemctl daemon-reload
 sudo systemctl start notesapp.service
 sudo systemctl status notesapp.service
 
+======================================== restore database =========================================
+
+psql -U administrator -h 34.70.219.238 postgres -f database.sql
+
 ========================================= delete database =========================================
 
 psql -U administrator -h 34.121.96.212 postgres
