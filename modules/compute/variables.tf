@@ -18,6 +18,6 @@ variable "instance_name" {
   type = string
 }
 
-variable "home_ip_address" {
+variable "service_account_email" {
   type = string
 }
